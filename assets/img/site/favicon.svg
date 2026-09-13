@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="John Silva">
+  <defs>
+    <linearGradient id="beam" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4fd1e0" stop-opacity="0"/>
+      <stop offset=".45" stop-color="#4fd1e0" stop-opacity=".95"/>
+      <stop offset="1" stop-color="#f0873f"/>
+    </linearGradient>
+    <radialGradient id="pool" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#fff6e8"/>
+      <stop offset=".35" stop-color="#ffb35c"/>
+      <stop offset="1" stop-color="#f0873f" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#0b0d12"/>
+  <rect x="8" y="43" width="48" height="9" rx="2" fill="#2b323e"/>
+  <rect x="8" y="43" width="48" height="2" fill="#3d4654"/>
+  <path d="M28 6h8l-1.6 34h-4.8z" fill="url(#beam)"/>
+  <ellipse cx="32" cy="45" rx="17" ry="9" fill="url(#pool)" opacity=".9"/>
+  <circle cx="32" cy="44.5" r="3.6" fill="#fff3e0"/>
+</svg>
