@@ -1678,21 +1678,116 @@ body.is-locked { overflow: hidden; }
 }
 
 @media print {
+  /* A4, not the browser's Letter default. Generous inner margin so the browser's
+     own header/footer (URL, page numbers) has room when the user leaves it on. */
+  @page { size: A4 portrait; margin: 14mm 13mm 15mm; }
+
   :root {
     --bg: #fff; --bg-raised: #fff; --bg-sunken: #fff; --panel: #fff; --panel-2: #fff;
-    --fg: #000; --fg-muted: #333; --fg-faint: #555;
-    --line: #ccc; --line-strong: #999; --accent: #056; --warm: #a04000;
+    --fg: #000; --fg-muted: #2e2e2e; --fg-faint: #5a5a5a;
+    --line: #ccc; --line-strong: #999; --accent: #065968; --warm: #a04000;
   }
-  body { background: #fff; color: #000; font-size: 10.5pt; }
+
+  body { background: #fff; color: #000; font-size: 9.6pt; line-height: 1.45; }
+
+  /* ---- hide anything interactive, navigational or purely decorative ---- */
   .site-head, .scroll-rail, .nav, .head-tools, .hero__bg, .hero__seam,
   .case__toggle, .lightbox, .contact__glow, .compare__knob, .compare__handle,
-  .skip-link { display: none !important; }
-  .section { padding-block: 1.2rem; page-break-inside: avoid; }
-  .case, .panel, .pub, .acc { break-inside: avoid; box-shadow: none; border-color: #ccc; }
+  .skip-link, .hero__status, .hero__actions, .foot-links,
+  #printCv, #copyEmail, .icon-btn, a.btn[href^="mailto"], .acc__btn svg, .fig button::after {
+    display: none !important;
+  }
+  /* Links that were styled as buttons become plain bold text; the URL rule below
+     then appends the address, so the DOI and the podcast survive on paper. */
+  a.btn {
+    display: inline; padding: 0; border: 0; background: none !important;
+    box-shadow: none; color: #000; font-weight: 600;
+  }
+  a.btn svg { display: none; }
+
+  /* ---- page-break discipline -------------------------------------------
+     The old rule put `page-break-inside: avoid` on .section and .case. Both are
+     many pages tall, so the browser cannot honour it and instead throws each one
+     onto a fresh page — which is where the half-empty pages came from. Let the
+     big containers break freely and protect only things that genuinely fit on
+     one page. */
+  .section { padding-block: 0.85rem 1rem; break-inside: auto; }
+  .case, .panel, .pub, .acc, .cases, .phases, .figures,
+  .cap-grid, .cred-grid, .pub-grid, .compare-set, .metrics__grid {
+    break-inside: auto; box-shadow: none;
+  }
+  .metric, .cap, .pub, .fig, .compare, .tl-item, .edu, .ccard, .phase,
+  .std-list li, .speak-list li, .cpd-list li, .conf-list li, .skillbar,
+  .tl-win, .pullquote, .chip-group, .factsheet__row, .testimonial blockquote {
+    break-inside: avoid;
+  }
+  h1, h2, h3, h4, h5, .eyebrow, .section-head, .case__meta, .acc__btn {
+    break-after: avoid;
+  }
+  p, li { orphans: 3; widows: 3; }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+
+  /* ---- expand every disclosure so the PDF is complete ---- */
   .case__detail, .acc__panel { grid-template-rows: 1fr !important; }
   .case__detail > div, .acc__panel > div { overflow: visible !important; }
+  .case__detail-inner, .acc__body { padding-top: 0.6rem; }
   [data-reveal] { opacity: 1 !important; transform: none !important; }
+
+  /* ---- tighten the hero: it was eating a whole page for six lines ---- */
+  .hero { padding-top: 0; padding-bottom: 0.4rem; }
+  .hero__inner { gap: 1.2rem; grid-template-columns: minmax(0, 1fr) 150px; align-items: start; }
+  .hero__name { font-size: 30pt; margin-bottom: 0.2rem; }
+  .hero__name .accented { background: none; color: var(--warm); -webkit-text-fill-color: var(--warm); }
+  .hero__pitch { font-size: 10.5pt; margin-bottom: 0.7rem; }
+  .hero__portrait { max-width: 150px; }
+  .hero__portrait img { filter: grayscale(1) contrast(1.05); }
+  .hero__portrait::after { display: none; }
+
+  /* ---- keep the numbers legible and coloured ---- */
+  .metric { padding: 0.7rem 0.9rem; }
+  .metric__value { font-size: 20pt; }
+  .case__kpis b, .metric__value .unit, .tag--accent, .tag--warm,
+  .skillbar__fill, .eyebrow::before, .conf-list .presenter, .spec-table .pos {
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .skillbar__track { border-color: #999; }
+  .skillbar__fill { background: var(--warm); }
+  /* A plain Ctrl+P never runs the button handler, so the bars would print empty.
+     CSS cannot read a data attribute into a width, so the values are mirrored here. */
+  .skillbar__fill[data-skill="97"] { width: 97% !important; }
+  .skillbar__fill[data-skill="94"] { width: 94% !important; }
+  .skillbar__fill[data-skill="93"] { width: 93% !important; }
+  .skillbar__fill[data-skill="90"] { width: 90% !important; }
+  .skillbar__fill[data-skill="86"] { width: 86% !important; }
+  .skillbar__fill[data-skill="84"] { width: 84% !important; }
+  .skillbar__fill[data-skill="82"] { width: 82% !important; }
+  .cap-grid { background: #fff; gap: 0; }
+  .cap { border-top: 1px solid #ccc; }
+  .cap-grid > .cap:first-child { border-top: 0; }
+
+  /* ---- images: never let one straddle a page break ---- */
+  .case__media, .fig, .compare__stage, .letter-card { break-inside: avoid; }
+  .case__head { break-inside: avoid; }
+  .case__media { aspect-ratio: 16 / 10; }
+  .fig img { aspect-ratio: 16 / 10; }
+  .fig button { cursor: default; }
+
+  /* ---- the comparison figures print as a fixed 50/50 split ---- */
   .compare__top { width: 50% !important; border-right: 1px solid #000; }
-  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 8pt; color: #555; word-break: break-all; }
-  .hero { padding-top: 0; }
+  .compare__badge { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  /* ---- links: show the address, but only where it adds something ---- */
+  a { color: #000; text-decoration: none; }
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 7.5pt; color: #5a5a5a; word-break: break-all; font-weight: 400;
+  }
+  .ccard::after, a[href^="#"]::after, .brand::after, .site-foot a::after { content: none !important; }
+  .ccard { padding: 0.6rem 0.8rem; }
+
+  /* ---- footer: keep the credit line, drop the navigation ---- */
+  .site-foot { padding-block: 0.8rem; border-top: 1px solid #ccc; }
+  .contact .lede { margin-bottom: 1rem; }
+  .contact h2 { font-size: 18pt; }
 }

@@ -356,8 +356,49 @@
     printBtn.addEventListener("click", function () {
       // Expand every disclosure so the printed document is complete.
       $$(".case__toggle[aria-expanded='false'], .acc__btn[aria-expanded='false']").forEach(function (b) { b.click(); });
-      setTimeout(function () { window.print(); }, 450);
+
+      // The skill bars are filled by an IntersectionObserver on scroll. Printing
+      // without having scrolled there left them as empty tracks, so fill them now.
+      $$(".skillbar__fill").forEach(function (b) { b.style.width = b.getAttribute("data-skill") + "%"; });
+
+      // Most figures live inside those panels and are loading="lazy", so they only
+      // begin downloading once revealed. Printing on a fixed timer raced them and
+      // produced PDFs with empty figures. Force them to load and wait for the real
+      // event, with a ceiling so one stalled image can never block printing.
+      var imgs = $$("img");
+      imgs.forEach(function (im) { if (im.loading === "lazy") im.loading = "eager"; });
+      var pending = imgs.filter(function (im) { return !im.complete || !im.naturalWidth; });
+
+      var label = printBtn.lastChild && printBtn.lastChild.nodeType === 3 ? printBtn.lastChild : null;
+      var original = label ? label.nodeValue : null;
+      function restore() {
+        if (label && original !== null) label.nodeValue = original;
+        printBtn.removeAttribute("aria-busy");
+      }
+
+      var printed = false;
+      function go() {
+        if (printed) return;
+        printed = true;
+        restore();
+        // Brief pause so layout settles after the last image lands.
+        setTimeout(function () { window.print(); }, 120);
+      }
+
+      if (!pending.length) { go(); return; }
+
+      printBtn.setAttribute("aria-busy", "true");
+      if (label) label.nodeValue = " Preparing\u2026";
+
+      var left = pending.length;
+      pending.forEach(function (im) {
+        var tick = function () { if (--left <= 0) go(); };
+        im.addEventListener("load", tick, { once: true });
+        im.addEventListener("error", tick, { once: true });
+      });
+      setTimeout(go, 8000);
     });
+    window.addEventListener("afterprint", function () { printBtn.removeAttribute("aria-busy"); });
   }
 
   /* ------------------------------------------------------------------ misc */
