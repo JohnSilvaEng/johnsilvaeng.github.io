@@ -1745,6 +1745,22 @@ body.is-locked { overflow: hidden; }
   thead { display: table-header-group; }
   tr { break-inside: avoid; }
 
+  /* ---- stop containers clipping their own content across a page break ----
+     These carry overflow:hidden on screen for rounded corners, the disclosure
+     animation and the hero glow. In print, a block with overflow:hidden that
+     spans a page boundary is clipped by Chromium: the glyphs are still in the
+     PDF's text layer, which is why a text check passes, but the reader sees the
+     paragraph sliced in half. Only the small image frames keep it, and those
+     never span a page because they carry break-inside: avoid. */
+  *:not(.case__media):not(.fig):not(.compare):not(.compare__stage):not(.compare__top):not(.skillbar__track):not(.hero__portrait):not(.visually-hidden) {
+    overflow: visible !important;
+  }
+  /* The exceptions are image frames and the slider mask. Every one of them also
+     carries break-inside: avoid, so none can straddle a page and clip itself.
+     Listing what may clip is safer than listing what may not: a different paper
+     size or margin repaginates the document, and any container can land on a
+     boundary. */
+
   /* ---- expand every disclosure so the PDF is complete ---- */
   .case__detail, .acc__panel { grid-template-rows: 1fr !important; }
   .case__detail > div, .acc__panel > div { overflow: visible !important; }
@@ -1801,6 +1817,7 @@ body.is-locked { overflow: hidden; }
 
   /* ---- the comparison figures print as a fixed 50/50 split ---- */
   .compare__top { width: 50% !important; border-right: 1px solid #000; }
+  .compare__top img { width: 200% !important; max-width: none !important; height: 100%; object-fit: cover; }
   .compare__badge { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 
   /* ---- links: show the address, but only where it adds something ---- */
