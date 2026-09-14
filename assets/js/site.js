@@ -111,15 +111,16 @@
 
   /* -------------------------------------------------------- animated counters */
 
-  function animateCount(el, target, suffix) {
-    if (reduceMotion) { el.textContent = target + (suffix || ""); return; }
+  function animateCount(el, target, dp) {
+    dp = dp || 0;
+    if (reduceMotion) { el.textContent = target.toFixed(dp); return; }
     var dur = 1300;
     var t0 = null;
     function step(ts) {
       if (t0 === null) t0 = ts;
       var p = Math.min(1, (ts - t0) / dur);
       var eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = Math.round(target * eased) + (suffix || "");
+      el.textContent = (target * eased).toFixed(dp);
       if (p < 1) requestAnimationFrame(step);
     }
     requestAnimationFrame(step);
@@ -127,18 +128,22 @@
 
   var counters = $$("[data-count]");
   counters.forEach(function (el) {
-    var target = parseInt(el.getAttribute("data-count"), 10);
+    var raw = el.getAttribute("data-count");
+    var target = parseFloat(raw);
+    // Match the written precision, so 3.2 counts up through 0.8, 1.6, 2.4 rather
+    // than being rounded to whole numbers on the way.
+    var dp = (raw.split(".")[1] || "").length;
     if (isNaN(target)) return;
     // The real figure is already in the markup so it survives with JS off, in reader
     // mode, and for crawlers. Keep it on screen and only blank it at the instant the
     // count-up is about to run.
-    if (!("IntersectionObserver" in window)) { el.textContent = String(target); return; }
+    if (!("IntersectionObserver" in window)) { el.textContent = target.toFixed(dp); return; }
     var io = new IntersectionObserver(function (entries, obs) {
       entries.forEach(function (en) {
         if (!en.isIntersecting) return;
         obs.unobserve(en.target);
-        el.textContent = "0";
-        animateCount(el, target);
+        el.textContent = (0).toFixed(dp);
+        animateCount(el, target, dp);
       });
     }, { threshold: 0.4 });
     io.observe(el);

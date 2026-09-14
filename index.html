@@ -184,6 +184,7 @@
       <ul class="hero__creds">
         <li>Aerospace · AS9100D</li>
         <li>Automotive · PPAP / PFMEA</li>
+        <li>EV battery · e-mobility</li>
         <li>Formula 1</li>
         <li>Medical</li>
         <li>Oil &amp; Gas</li>
@@ -206,9 +207,9 @@
   <div class="shell">
     <div class="metrics__grid">
       <div class="metric">
-        <div class="metric__value"><span class="unit">+</span><span data-count="66">66</span><span class="unit">%</span></div>
-        <p class="metric__label">Turnover growth after I rebuilt the company's technical and quality strategy</p>
-        <p class="metric__note">2016 → present</p>
+        <div class="metric__value"><span class="unit">×</span><span data-count="3.2">3.2</span></div>
+        <p class="metric__label">Turnover, FY2016 to FY2026, after I rebuilt the company's technical and quality strategy</p>
+        <p class="metric__note">Management accounts · year to April 2026</p>
       </div>
       <div class="metric">
         <div class="metric__value"><span class="unit">+</span><span data-count="26">26</span><span class="unit">%</span></div>
@@ -250,7 +251,7 @@
           on the floor of the very company that then hired me. Since 2012 I
           have worked my way from the shop floor to <strong>Technical Director and co-owner of CWT
           Group</strong> — a precision laser welding subcontractor serving aerospace,
-          automotive, Formula&nbsp;1, medical, oil&nbsp;&amp; gas and tool engineering. In 2025 I completed a
+          automotive, EV battery, Formula&nbsp;1, medical, oil&nbsp;&amp; gas and tool engineering.
           management buyout of the business alongside my two fellow directors.
         </p>
         <p>
@@ -284,7 +285,7 @@
           <div class="factsheet__row"><dt>Standards</dt><dd>AS9100D, ISO 9001:2015, ISO 14001</dd></div>
           <div class="factsheet__row"><dt>Published</dt><dd><em>Metals</em> 12(6):1041, 2022 · <em>The Laser User</em> #106</dd></div>
           <div class="factsheet__row"><dt>Languages</dt><dd>English (Cambridge CPE, C2) · Portuguese (native)</dd></div>
-          <div class="factsheet__row"><dt>Off the clock</dt><dd>Triathlon — Portuguese National Champion, 2003. Still running, cycling, swimming and writing code.</dd></div>
+          <div class="factsheet__row"><dt>Off the clock</dt><dd>Triathlon — Portuguese National Champion, 2003. Since 2024, bladesmithing: heat-treating tool steel in a PID-controlled furnace at home, and a book for beginners in draft.</dd></div>
         </dl>
       </aside>
     </div>
@@ -330,7 +331,7 @@
       <article class="cap">
         <div class="cap__icon"><svg aria-hidden="true"><use href="#i-shield"></use></svg></div>
         <h3>Quality systems &amp; compliance</h3>
-        <p>Writing, implementing and maintaining the management systems that let a subcontractor sell into aerospace and automotive — then running the audits, inspections and documentation that keep them credible.</p>
+        <p>Writing, implementing and maintaining the management systems that let a subcontractor sell into aerospace and automotive — then running the audits, inspections and documentation that keep them credible. Fourteen years running the system; twice-yearly management reviews signed by all directors.</p>
         <ul><li>AS9100D</li><li>ISO 9001:2015</li><li>ISO 14001</li><li>PFMEA / PPAP</li><li>FAIR / CofC / IR</li></ul>
       </article>
 
@@ -348,6 +349,25 @@
         <ul><li>KPI design</li><li>Power BI · Excel / VBA</li><li>PERT · CPM · Gantt</li><li>Workflow redesign</li></ul>
       </article>
     </div>
+
+    <div class="speaking" data-reveal>
+      <h3 style="font-size:var(--step-1);margin-bottom:0.6rem">Engineering tools I have built</h3>
+      <p style="color:var(--fg-muted);font-size:0.9rem;margin-bottom:1.2rem">Software written to the same standard as the quality system it serves.</p>
+      <ul class="speak-list">
+        <li>
+          <span class="when">2013 → now</span>
+          <span class="what"><b>Laser Settings Predictor</b> — an Excel calculation tool I built in 2013 to derive starting laser parameters and predicted penetration depth from a job's material, thickness and target depth. In use at quote and setup stage ever since; now being ported to a standalone desktop application so it works without me in the room.</span>
+        </li>
+        <li>
+          <span class="when">2026</span>
+          <span class="what"><b>WPS Database</b> — desktop application for authoring and printing Welding Procedure Specifications to ISO 15609-4. Offline by design as a customer-confidentiality control, verified by a zero-network sweep of every screen. Six Architecture Decision Records, SHA-256 build identity, and a 247-check verification harness with mutation coverage. A data-entry fix caught a fivefold error in a vacuum-leak acceptance threshold on a real procedure before it shipped.</span>
+        </li>
+        <li>
+          <span class="when">2026</span>
+          <span class="what"><b>KPI Dashboard</b> — <a href="#case-kpi">see Case 05</a>.</span>
+        </li>
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -357,7 +377,7 @@
     <header class="section-head section-head--split">
       <div>
         <p class="eyebrow">03 — Selected work</p>
-        <h2 class="section-title">Four problems, and what I did about them</h2>
+        <h2 class="section-title">Five problems, and what I did about them</h2>
       </div>
       <p class="section-lede">
         Each one opens into the full engineering story — the context, the constraint, the method and
@@ -590,6 +610,8 @@
                 <em>The Laser User</em>, Issue 106. I presented the concept at Ultramat open days in
                 2019 and 2020, and took it to ILAS in March 2023 as <em>Soni-Laser</em> — a route to
                 high-volume assembly of automotive battery packs.
+                Both Ultramat (2017) and Soni-Laser (2022) were Innovate UK-funded collaborative
+                projects, the latter with the Brunel Innovation Centre.
               </p>
               <p style="margin-top:0.9rem">
                 <a class="btn btn--ghost btn--sm" href="https://doi.org/10.3390/met12061041" target="_blank" rel="noopener">
@@ -965,6 +987,96 @@
         </div></div></div>
       </article>
 
+      <!-- ---------- CASE 05 : KPI dashboard application ---------- -->
+      <article class="case" id="case-kpi" data-reveal>
+        <div class="case__head">
+          <div>
+            <div class="case__meta">
+              <span class="case__index">Case 05</span>
+              <span class="tag tag--accent">Software</span>
+              <span class="tag">ISO 9001 / 14001</span>
+              <span class="tag">Data</span>
+            </div>
+            <h3 class="case__title">Instrumenting the business, ten years on</h3>
+            <p class="case__summary">
+              Case 03 was built in Excel and Power BI in 2016. By 2026 the business was three times the
+              size, the auditor's report named the KPI spreadsheets by hand, and every number still ran
+              through me. So I replaced them with an application the company could run without me: a
+              desktop KPI dashboard that imports directly from the accounts ledger, measures the three
+              things that matter, and forecasts the year ahead.
+            </p>
+            <ul class="case__kpis">
+              <li><b>85%</b><span>jobs turned round within five days, against a target that did not exist before</span></li>
+              <li><b>±1.5%</b><span>forecast accuracy in stable years, rolling-origin backtest</span></li>
+              <li><b>−19%</b><span>energy per unit of sales, year on year (ISO 14001)</span></li>
+            </ul>
+            <p class="case__summary" style="margin-bottom:0">
+              Built for the December 2026 surveillance audit. Management review now runs on it.
+            </p>
+          </div>
+          <figure class="case__media">
+            <img src="assets/img/work/biz-powerbi.jpg" alt="Power BI dashboard showing average job duration gauges and distribution charts" loading="lazy" width="1100" height="813">
+            <figcaption>Predecessor dashboard, 2016 — replaced by the application described here</figcaption>
+          </figure>
+        </div>
+
+        <button class="case__toggle" type="button" aria-expanded="false" aria-controls="detail-kpi">
+          <span><span class="lbl-open">Read the full case study</span><span class="lbl-close">Close case study</span></span>
+          <span class="case__toggle-hint">Scope · Method · Engineering <svg aria-hidden="true"><use href="#i-chev-down"></use></svg></span>
+        </button>
+
+        <div class="case__detail" id="detail-kpi"><div><div class="case__detail-inner">
+          <div class="phases">
+
+            <div class="phase">
+              <h4>What it replaced</h4>
+              <p>
+                Three Excel pivot dashboards — sales analysis, job completion and non-conformance
+                analysis — maintained by hand and cited by name in the auditor's December 2025 report.
+                Twenty-six years of invoice history and eleven years of nominal-ledger data, imported
+                from Sage exports.
+              </p>
+            </div>
+
+            <div class="phase">
+              <h4>What it measures</h4>
+              <p>
+                Eleven views: sales against target, turnaround SLA, profit and loss, non-conformances
+                with effectiveness review, energy intensity, calibration register, forecast, reports,
+                imports, settings, home.
+              </p>
+              <p>
+                Turnaround now reports the share of jobs closed within five working days against a formal
+                85% target. The earlier measure had been an average of jobs falling between three and
+                five days, with no target at all. Setting the target required documenting which orders
+                count — framework and paused orders are excluded, and the exclusion is recorded.
+              </p>
+            </div>
+
+            <div class="phase">
+              <h4>Forecasting</h4>
+              <p>
+                Holt-Winters exponential smoothing with additive seasonality and damped trend, trained on
+                monthly invoiced sales since 2010. Validated by a three-year rolling-origin backtest:
+                projected annual totals landed within ±1.5% of actuals in the two stable years. The
+                step-change year was under-forecast by 28% — which the method reports rather than hides.
+              </p>
+            </div>
+
+            <div class="phase">
+              <h4>Engineering</h4>
+              <p>
+                Python, PyQt6 and SQLite; packaged with PyInstaller and an Inno Setup installer in two
+                flavours, Writer and read-only Viewer, so colleagues see the same numbers without being
+                able to change them. Two automated validators run as the release gate. First installed on
+                a second machine in August 2026.
+              </p>
+            </div>
+
+          </div>
+        </div></div></div>
+      </article>
+
     </div>
   </div>
 </section>
@@ -1025,6 +1137,7 @@
           follow-on research at the Brunel Innovation Centre extending the method to dissimilar-metal
           joints.
           <span style="display:block;margin-top:.3rem;font-size:.92em;color:var(--fg-faint)">Crossref, September 2026</span>
+          <span style="display:block;margin-top:.5rem">Research funded by Innovate UK (Ultramat, 2017; Soni-Laser, 2022).</span>
         </p>
         <div class="pub__foot">
           <a class="btn btn--ghost btn--sm" href="https://doi.org/10.3390/met12061041" target="_blank" rel="noopener">
@@ -1289,6 +1402,9 @@
           <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span><b>AS9100D</b> — aerospace QMS. Wrote and implemented it from scratch; maintain it and run the internal audits.</span></li>
           <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span><b>ISO 9001:2015</b> — quality management. Implemented, maintained, internally audited.</span></li>
           <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span><b>ISO 14001</b> — environmental management. Created and implemented in 2021.</span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span><b>Recertification, December 2025</b> — ISO 9001:2015 and ISO 14001:2015, two-day external audit: zero major, zero minor non-conformances, one opportunity for improvement.</span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span><b>Welding procedure standards</b> — WPS authored to ISO 15609-4; weld quality levels to EN ISO 13919-1 and -2; procedures qualified by customer examination and approval under EN ISO 15611; visual inspection to EN ISO 17637.</span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span><b>Records</b> — quality records retained 10 years for standard customers and 30+ years for aerospace; paper originals are the retained record.</span></li>
           <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span><b>PFMEA &amp; PPAP</b> — automotive and aerospace process quality.</span></li>
           <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span><b>FAIR, CofC, IR</b> — first article inspection reports, certificates of conformance, inspection reports.</span></li>
           <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span><b>Inspection methods</b> — visual, dye penetrant, helium leak testing, macro and micro analysis.</span></li>
@@ -1321,7 +1437,7 @@
         <div class="chip-group">
           <h4>Programming</h4>
           <ul class="chips">
-            <li>Python</li><li>VBA</li><li>Matlab</li><li>Maple</li><li>Fortran 90</li><li>Java</li><li>Saia PG5</li><li>HTML / CSS</li>
+            <li>Python</li><li>SQL / SQLite</li><li>PyQt6</li><li>React</li><li>JavaScript</li><li>VBA</li><li>Matlab</li><li>Maple</li><li>Fortran 90</li><li>Java</li><li>Saia PG5</li><li>HTML / CSS</li>
           </ul>
         </div>
         <div class="chip-group">
@@ -1427,7 +1543,7 @@
       <div class="acc">
         <button class="acc__btn" type="button" aria-expanded="false" aria-controls="acc-wins">
           <span>Milestones</span>
-          <span class="count">2003 — 2023</span>
+          <span class="count">2003 — 2026</span>
           <svg aria-hidden="true"><use href="#i-plus"></use></svg>
         </button>
         <div class="acc__panel" id="acc-wins"><div><div class="acc__body">
@@ -1449,6 +1565,12 @@
             <li><span class="yr">2021</span><span>Promoted to Technical Director</span></li>
             <li><span class="yr">2022</span><span>Published in <em>Metals</em> — ultrasonic-assisted laser welding of aluminium alloys</span></li>
             <li><span class="yr">2022</span><span>Feature article published in <em>The Laser User</em>, Issue 106</span></li>
+            <li><span class="yr">2025</span><span>Company rebranded as CWT Group (September)</span></li>
+            <li><span class="yr">2025</span><span>Management buyout completed with two fellow directors (October)</span></li>
+            <li><span class="yr">2025</span><span>Recertified to ISO 9001:2015 and ISO 14001:2015 with zero non-conformances (December)</span></li>
+            <li><span class="yr">2026</span><span>KPI dashboard application deployed, replacing the 2016 spreadsheets</span></li>
+            <li><span class="yr">2026</span><span>WPS Database under version control with Architecture Decision Records</span></li>
+            <li><span class="yr">2026</span><span>Turnover 3.2× the FY2016 figure (management accounts, year to April)</span></li>
           </ul>
         </div></div></div>
       </div>
