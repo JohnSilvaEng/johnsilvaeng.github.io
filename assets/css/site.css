@@ -1686,9 +1686,26 @@ body.is-locked { overflow: hidden; }
     --bg: #fff; --bg-raised: #fff; --bg-sunken: #fff; --panel: #fff; --panel-2: #fff;
     --fg: #000; --fg-muted: #2e2e2e; --fg-faint: #5a5a5a;
     --line: #ccc; --line-strong: #999; --accent: #065968; --warm: #a04000;
+
+    /* The screen scale is fluid: clamp(min, base + Nvw, max). In print, vw
+       resolves against the A4 page box (210mm = 794px), which is close enough to
+       a desktop viewport that every step lands near its maximum — so headings
+       printed at 24pt against 9.6pt body. Fixed point sizes for paper. */
+    --step--1: 7.2pt;
+    --step-0:  9.3pt;
+    --step-1:  10.6pt;
+    --step-2:  13pt;
+    --step-3:  15.5pt;
+    --step-4:  19pt;
+    --step-5:  24pt;
   }
 
-  body { background: #fff; color: #000; font-size: 9.6pt; line-height: 1.45; }
+  /* Shrinks everything still expressed in rem — component font sizes, padding and
+     gaps — by the same proportion, so the whole document scales together. */
+  html { font-size: 12.5px; }
+
+  body { background: #fff; color: #000; font-size: var(--step-0); line-height: 1.45; }
+  .screen-only { display: none !important; }
 
   /* ---- hide anything interactive, navigational or purely decorative ---- */
   .site-head, .scroll-rail, .nav, .head-tools, .hero__bg, .hero__seam,
@@ -1737,16 +1754,25 @@ body.is-locked { overflow: hidden; }
   /* ---- tighten the hero: it was eating a whole page for six lines ---- */
   .hero { padding-top: 0; padding-bottom: 0.4rem; }
   .hero__inner { gap: 1.2rem; grid-template-columns: minmax(0, 1fr) 150px; align-items: start; }
-  .hero__name { font-size: 30pt; margin-bottom: 0.2rem; }
+  .hero__name { font-size: var(--step-5); margin-bottom: 0.2rem; }
   .hero__name .accented { background: none; color: var(--warm); -webkit-text-fill-color: var(--warm); }
-  .hero__pitch { font-size: 10.5pt; margin-bottom: 0.7rem; }
+  .hero__pitch { font-size: var(--step-1); margin-bottom: 0.7rem; }
   .hero__portrait { max-width: 150px; }
   .hero__portrait img { filter: grayscale(1) contrast(1.05); }
   .hero__portrait::after { display: none; }
 
+  /* Two-column layouts whose media queries sit above the print page width would
+     otherwise collapse, leaving prose running the full measure. Force them. */
+  .about__grid { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 1.4rem; }
+  .factsheet__row { grid-template-columns: 5.4rem minmax(0, 1fr); padding: 0.5rem 0.7rem; }
+  .cred-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .prose > p { max-width: 82ch; }
+
   /* ---- keep the numbers legible and coloured ---- */
   .metric { padding: 0.7rem 0.9rem; }
-  .metric__value { font-size: 20pt; }
+  .metric__value { font-size: 16pt; }
+  .case__kpis b { font-size: 12.5pt; }
+  .testimonial__mark { font-size: 26pt; }
   .case__kpis b, .metric__value .unit, .tag--accent, .tag--warm,
   .skillbar__fill, .eyebrow::before, .conf-list .presenter, .spec-table .pos {
     -webkit-print-color-adjust: exact; print-color-adjust: exact;
@@ -1789,5 +1815,5 @@ body.is-locked { overflow: hidden; }
   /* ---- footer: keep the credit line, drop the navigation ---- */
   .site-foot { padding-block: 0.8rem; border-top: 1px solid #ccc; }
   .contact .lede { margin-bottom: 1rem; }
-  .contact h2 { font-size: 18pt; }
+  .contact h2 { font-size: var(--step-4); }
 }
