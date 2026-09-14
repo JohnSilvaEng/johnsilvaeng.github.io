@@ -72,9 +72,16 @@ with a comment banner so you can find it quickly:
 
 ### Things worth knowing
 
-**The years counter updates itself.** The "Years specialising in laser welding" metric is
-calculated from `data-count-years="2012"` — it will say 15 in 2027 without you touching it.
-Same for the footer copyright year.
+**Nothing on the page states a duration.** The third hero metric shows the *year* 2012, not
+a number of years, precisely so it can never go stale. GitHub Pages serves static files, so
+anything computed would have to be written into the HTML by hand or by a scheduled job —
+both of which rot silently. A fixed year needs neither.
+
+The small caption under it (`data-years-since="2012"`) is written by JavaScript as
+"14 years and counting". That is decoration: if the script never runs, the caption reads
+"Still counting" and no incorrect figure is ever published. Apply the same rule to anything
+you add — put a date in the markup and let the script derive the duration, never the
+reverse. The footer copyright year works the same way.
 
 **Adding a case study.** Copy a whole `<article class="case">…</article>` block. Change the
 `id`, the `aria-controls` on the toggle button, and the matching `id` on the

@@ -125,23 +125,13 @@
     requestAnimationFrame(step);
   }
 
-  var counters = $$("[data-count], [data-count-years]");
+  var counters = $$("[data-count]");
   counters.forEach(function (el) {
-    var years = el.getAttribute("data-count-years");
-    var target;
-    if (years) {
-      // Anniversary is March of the start year, so the figure never goes stale.
-      var start = new Date(parseInt(years, 10), 2, 1);
-      var now = new Date();
-      target = now.getFullYear() - start.getFullYear() - (now.getMonth() < 2 ? 1 : 0);
-    } else {
-      target = parseInt(el.getAttribute("data-count"), 10);
-    }
+    var target = parseInt(el.getAttribute("data-count"), 10);
     if (isNaN(target)) return;
     // The real figure is already in the markup so it survives with JS off, in reader
     // mode, and for crawlers. Keep it on screen and only blank it at the instant the
     // count-up is about to run.
-    if (years) el.textContent = String(target);
     if (!("IntersectionObserver" in window)) { el.textContent = String(target); return; }
     var io = new IntersectionObserver(function (entries, obs) {
       entries.forEach(function (en) {
@@ -152,6 +142,17 @@
       });
     }, { threshold: 0.4 });
     io.observe(el);
+  });
+
+  /* --------------------------------------------------- elapsed-years caption */
+
+  $$("[data-years-since]").forEach(function (el) {
+    var from = parseInt(el.getAttribute("data-years-since"), 10);
+    if (isNaN(from)) return;
+    var now = new Date();
+    // Anniversary is March, when John joined in 2012.
+    var n = now.getFullYear() - from - (now.getMonth() < 2 ? 1 : 0);
+    if (n > 0) el.textContent = n + (n === 1 ? " year" : " years") + " and counting";
   });
 
   /* ------------------------------------------------------------- skill bars */
