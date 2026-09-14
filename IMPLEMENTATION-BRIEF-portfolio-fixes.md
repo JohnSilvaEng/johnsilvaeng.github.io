@@ -6,8 +6,8 @@ Date: 14 September 2026
 
 ## DECISIONS
 
-Items 1–6 are resolved by John (14 Sep 2026). Item 7 is OPEN — Code must
-stop-and-ask if it is still blank at handover.
+All eight items are resolved (14 Sep 2026). Nothing is left open; stop-and-ask only if the
+page contradicts an item below.
 
 1. Company name — RESOLVED. The trading name is "CWT Group" (rebrand, September 2025).
    The legal entity is still Carr's Welding Technologies Ltd (no. 03921135). There is no
@@ -23,7 +23,7 @@ stop-and-ask if it is still blank at handover.
 5. Experience entry 1 — RESOLVED: option B. Keep "Technical Director & Co-owner" and add a
    one-line note under it. Exact wording depends on 7:
    "Shareholder since 2016; statutory director since September 2021; co-owner via
-   management buyout, <YEAR from 7>."
+   management buyout, October 2025 (completed March 2026)."
 6. Shareholding year — RESOLVED: 2016 is correct (first shares acquired 2016, more in
    2017). All four existing "2016" references stay as they are. The note in decision 5
    reads "Shareholder since 2016; ...".
@@ -35,6 +35,10 @@ stop-and-ask if it is still blank at handover.
    September 2021; co-owner via management buyout, October 2025 (completed March 2026)."
    Nowhere else on the page gains a 2026 date — the note is the only place the completion
    date appears.
+8. First contact with the company — RESOLVED. There was no 2009 placement. John started
+   his MSc thesis at IST in September 2009 and did the practical welding trials at Carr's
+   Welding Technologies in February–March 2010. Every "2009" that refers to time at the
+   company is wrong and becomes February 2010; "placement" becomes "thesis trials".
 
 ## JOB
 
@@ -58,18 +62,20 @@ compute it server-side-equivalent: hard-code the correct current value as the fa
 text and let the script keep it live.
 
 ### 3. Milestones list — ordering and dates
-- Move "2009 — Summer placement at Carr's Welding Technologies" into chronological
-  position, so the list is strictly ascending.
+- The "2009 — Summer placement at Carr's Welding Technologies" entry becomes
+  "2010 — MSc thesis welding trials at Carr's Welding Technologies (February–March)"
+  and moves into chronological position, so the list is strictly ascending (decision 8).
+- grep the whole file for "2009" and "placement": any other occurrence that describes
+  time at the company (hero prose, Profile, Experience, case studies) is corrected per
+  decision 8. A "2009" that refers to the start of the MSc thesis at IST is correct and
+  stays.
 - Apply decisions 2, 3 and 4 exactly as worded. Move the Heat Transfer line in the
   Education section from the BEng entry to the MSc entry.
-- Apply decisions 6 and 7 to every occurrence listed under them, so the shareholding year
-  and the MBO year each say the same thing everywhere on the page.
 
 ### 4. Experience entry 1 — ownership note
 Add the one-line note from decision 5 directly under the "Technical Director & Co-owner"
-heading, with the MBO year filled in from decision 7. Update the At-a-glance "Board"
-line to match: "Statutory director since 2021; shareholder since 2016; co-owner via
-management buyout, <7>".
+heading. Update the At-a-glance "Board" line to match: "Statutory director since 2021;
+shareholder since 2016; co-owner via management buyout, 2025".
 
 ### 5. Company name — replace "CWT Welding Technologies" with "CWT Group"
 Every present-tense reference to the current company becomes "CWT Group": hero
@@ -87,9 +93,10 @@ at the time. Experience entry 2's "now trading as CWT" becomes "now trading as C
 ### 6. Copy fixes
 - Testimonial (Alistair Houghton): the opening has two quote marks (a typographic “ and
   a straight "). Remove the straight one so the quote opens once.
-- Profile paragraph: "having first arrived there in 2009 as a placement student" — "there"
-  reads as Lisbon. Change to "having first arrived at Carr's in 2009 as a placement
-  student" — "Carr's" is correct here because that was the name in 2009.
+- Profile paragraph: "having first arrived there in 2009 as a placement student" — wrong
+  date, wrong activity, and "there" reads as Lisbon. Change to "having first arrived at
+  Carr's in February 2010 to run the welding trials for my thesis" — "Carr's" is correct
+  here because that was the name at the time.
 
 ## WHY
 
@@ -122,7 +129,8 @@ Preserve-list (must be byte-identical after the change):
 - [ ] `og:image` (and `twitter:image`) is an absolute `https://johnsilvaeng.github.io/...` URL; show the rendered `<head>` block as proof
 - [ ] `curl -s https://johnsilvaeng.github.io/ | grep -A2 'stat'` (or equivalent on the local file) shows `+66%`, `+26%`, the years figure and `3` as text, not `0`
 - [ ] Milestones list is strictly ascending by year; show the list
-- [ ] For each of decisions 2–7, quote the before and after line for every occurrence changed
+- [ ] `grep -n "2009\|placement"` output after the change, each remaining hit justified as IST-thesis-start
+- [ ] For each of decisions 2–8, quote the before and after line for every occurrence changed
 - [ ] `grep -c "CWT Welding Technologies"` returns 0 after the change
 - [ ] `grep -n "Carr's Welding\|CWT Group\|CWT"` listed after the change, each occurrence tagged as present-tense (must be "CWT Group"), legal-entity (the one permitted line), or historical (dated before Sep 2025)
 - [ ] Testimonial opens with exactly one quote mark; quote the line
