@@ -23,13 +23,13 @@
 
   <text x="88" y="148" font-family="Liberation Mono, monospace" font-size="19" letter-spacing="5" fill="#4fd1e0">MECHANICAL ENGINEERING PORTFOLIO</text>
   <text x="88" y="256" font-family="Liberation Sans, Noto Sans, sans-serif" font-weight="bold" font-size="90" fill="#eef1f6">John Silva</text>
-  <text x="88" y="306" font-family="Liberation Sans, Noto Sans, sans-serif" font-size="30" fill="#c2cad6">Technical Director &amp; Co-owner · CWT Welding Technologies</text>
+  <text x="88" y="306" font-family="Liberation Sans, Noto Sans, sans-serif" font-size="30" fill="#c2cad6">Technical Director &amp; Co-owner · CWT Group</text>
   <text x="88" y="344" font-family="Liberation Sans, Noto Sans, sans-serif" font-size="26" fill="#8b94a3">MSc Mechanical Engineering · Laser welding specialist</text>
   <rect x="88" y="382" width="180" height="4" rx="2" fill="url(#rule)"/>
 
   <g font-family="Liberation Sans, Noto Sans, sans-serif">
-    <text x="88"  y="482" font-size="54" font-weight="bold" fill="#f0873f">+66%</text>
-    <text x="88"  y="516" font-size="20" fill="#8b94a3">turnover growth</text>
+    <text x="88"  y="482" font-size="54" font-weight="bold" fill="#f0873f">&#215;3.2</text>
+    <text x="88"  y="516" font-size="20" fill="#8b94a3">turnover, FY16&#8211;FY26</text>
 
     <text x="318" y="482" font-size="54" font-weight="bold" fill="#f0873f">+26%</text>
     <text x="318" y="516" font-size="20" fill="#8b94a3">weld tensile strength</text>

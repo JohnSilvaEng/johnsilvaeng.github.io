@@ -122,16 +122,22 @@ reader announces, what shows if an image fails to load, and what Google indexes.
 
 ## The social share card
 
-`assets/img/site/og-cover-2.jpg` is what appears when the link is pasted into LinkedIn,
+`assets/img/site/og-cover-4.jpg` is what appears when the link is pasted into LinkedIn,
 WhatsApp, Slack or an email client.
 
 The source is kept alongside it as `assets/img/site/og-cover.svg` — edit that, then
 regenerate:
 
 ```bash
-rsvg-convert -w 1200 -h 630 assets/img/site/og-cover.svg -o /tmp/og.png
-magick /tmp/og.png -strip -quality 88 assets/img/site/og-cover-2.jpg
+rsvg-convert -w 1600 -h 840 assets/img/site/og-cover.svg -o /tmp/og.png
+magick /tmp/og.png -strip -quality 88 assets/img/site/og-cover-4.jpg
 ```
+
+**Give it a new filename every time you change it** — `og-cover-5.jpg`, and so on. LinkedIn
+caches share images by URL on a separate cycle from the page, so overwriting the file in
+place leaves it serving the old picture indefinitely. Update the two references in
+`index.html` (`og:image` and `twitter:image`) to match, and `og:image:width` / `height` if
+the size changed.
 
 After changing it, run the live URL through
 [LinkedIn's Post Inspector](https://www.linkedin.com/post-inspector/) to clear their cache —
