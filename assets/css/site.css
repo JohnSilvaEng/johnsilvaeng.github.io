@@ -1724,7 +1724,7 @@ body.is-locked { overflow: hidden; }
   .site-head, .scroll-rail, .nav, .head-tools, .hero__bg, .hero__seam,
   .case__toggle, .lightbox, .contact__glow, .compare__knob, .compare__handle,
   .skip-link, .hero__status, .hero__actions, .foot-links,
-  #printCv, #copyEmail, .icon-btn, a.btn[href^="mailto"], .acc__btn svg, .fig button::after {
+  #copyEmail, .icon-btn, a.btn[href^="mailto"], a[download], .acc__btn svg, .fig button::after {
     display: none !important;
   }
   /* Links that were styled as buttons become plain bold text; the URL rule below

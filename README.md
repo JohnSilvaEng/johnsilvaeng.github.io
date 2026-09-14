@@ -12,6 +12,8 @@ assets/
   js/site.js               theme, nav, reveals, sliders, lightbox
   img/site/                headshot, favicons, social share card
   img/work/                case-study photography, micrographs, charts
+  docs/                    the downloadable PDF, built by tools/build-pdf.sh
+tools/build-pdf.sh         rebuilds that PDF
 ```
 
 > **Publishing for the first time?** Follow [`DEPLOY.md`](DEPLOY.md) instead — it is a
@@ -145,12 +147,32 @@ otherwise they may serve the old preview for days.
 
 ---
 
-## Printing
+## The downloadable PDF
 
-The **Save as PDF** button in the Contact section expands every collapsed panel and then
-opens the browser print dialogue. There is a dedicated print stylesheet at the bottom of
-`site.css` that switches to a light, ink-friendly palette, hides the navigation and
-interactive furniture, and prints link addresses in full.
+The **Download PDF** button serves a pre-built file:
+`assets/docs/John-Silva-Engineering-Portfolio.pdf`.
+
+It used to ask the reader's browser to print the page, which meant the document they got
+depended on their browser, operating system, paper size, margin preset and — worst of all —
+Chrome's **"Background graphics"** checkbox, which is off by default and rendered the whole
+thing dark. Building it once here and serving that file gives every reader the same
+document.
+
+**Rebuild it whenever the page content changes**, or the download goes stale:
+
+```bash
+./tools/build-pdf.sh
+```
+
+The script opens every case study and accordion, fills the skill bars, forces the lazy
+images to load, renders A4 at 26 pages, and then refuses to ship a file with too few pages
+or too few images — the failure mode it is guarding against is a render that raced the
+image downloads and came out with holes in it.
+
+`Ctrl+P` still works for anyone who prefers it: a `beforeprint` hook expands the page first,
+and the print stylesheet at the bottom of `site.css` switches to a light, ink-friendly
+palette, hides the navigation and interactive furniture, and prints link addresses in full.
+The download is the better copy, because printing cannot wait for images to arrive.
 
 ---
 
