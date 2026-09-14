@@ -122,7 +122,7 @@ reader announces, what shows if an image fails to load, and what Google indexes.
 
 ## The social share card
 
-`assets/img/site/og-cover.jpg` is what appears when the link is pasted into LinkedIn,
+`assets/img/site/og-cover-2.jpg` is what appears when the link is pasted into LinkedIn,
 WhatsApp, Slack or an email client.
 
 The source is kept alongside it as `assets/img/site/og-cover.svg` — edit that, then
@@ -130,7 +130,7 @@ regenerate:
 
 ```bash
 rsvg-convert -w 1200 -h 630 assets/img/site/og-cover.svg -o /tmp/og.png
-magick /tmp/og.png -strip -quality 88 assets/img/site/og-cover.jpg
+magick /tmp/og.png -strip -quality 88 assets/img/site/og-cover-2.jpg
 ```
 
 After changing it, run the live URL through
