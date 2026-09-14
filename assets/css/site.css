@@ -1682,7 +1682,20 @@ body.is-locked { overflow: hidden; }
      own header/footer (URL, page numbers) has room when the user leaves it on. */
   @page { size: A4 portrait; margin: 14mm 13mm 15mm; }
 
+  /* Chrome's print dialog ships with "Background graphics" UNCHECKED, so a PDF a
+     reader makes themselves has no painted backgrounds. Two things then go wrong:
+     the root still declares color-scheme: dark, so the UA paints a dark canvas and
+     picks dark-mode defaults; and anything relying on a background for contrast
+     disappears. print-color-adjust: exact tells Chrome these colours are essential
+     and prints them whatever the checkbox says, and color-scheme: light stops the
+     canvas going dark if it ever does not. */
+  *, *::before, *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
   :root {
+    color-scheme: light;
     --bg: #fff; --bg-raised: #fff; --bg-sunken: #fff; --panel: #fff; --panel-2: #fff;
     --fg: #000; --fg-muted: #2e2e2e; --fg-faint: #5a5a5a;
     --line: #ccc; --line-strong: #999; --accent: #065968; --warm: #a04000;
@@ -1812,6 +1825,14 @@ body.is-locked { overflow: hidden; }
   .case__media, .fig, .compare__stage, .letter-card { break-inside: avoid; }
   .case__head { break-inside: avoid; }
   .case__media { aspect-ratio: 16 / 10; }
+  /* White-on-gradient caption: unreadable if the gradient is not painted. In print
+     it sits below the image as plain dark text instead. */
+  .case__media { aspect-ratio: auto; border: 0; }
+  .case__media img { position: static; width: 100%; height: auto; border: 1px solid #ccc; border-radius: 6px; }
+  .case__media figcaption {
+    position: static; background: none !important; color: #000;
+    padding: 0.3rem 0 0; font-size: 7pt;
+  }
   .fig img { aspect-ratio: 16 / 10; }
   .fig button { cursor: default; }
 
