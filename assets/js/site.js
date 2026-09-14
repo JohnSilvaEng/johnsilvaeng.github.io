@@ -138,13 +138,17 @@
       target = parseInt(el.getAttribute("data-count"), 10);
     }
     if (isNaN(target)) return;
-    el.textContent = "0";
+    // The real figure is already in the markup so it survives with JS off, in reader
+    // mode, and for crawlers. Keep it on screen and only blank it at the instant the
+    // count-up is about to run.
+    if (years) el.textContent = String(target);
     if (!("IntersectionObserver" in window)) { el.textContent = String(target); return; }
     var io = new IntersectionObserver(function (entries, obs) {
       entries.forEach(function (en) {
         if (!en.isIntersecting) return;
-        animateCount(el, target);
         obs.unobserve(en.target);
+        el.textContent = "0";
+        animateCount(el, target);
       });
     }, { threshold: 0.4 });
     io.observe(el);
