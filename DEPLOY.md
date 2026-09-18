@@ -43,7 +43,8 @@ and correct as of the last update:
 | Legal entity | Carr's Welding Technologies Ltd, no. 03921135 |
 | Your role | Technical Director & Co-owner |
 | Statutory director | Since 1 September 2021 |
-| Shareholder (PSC) | Since 1 October 2025, via management buyout |
+| Shareholder | Since November 2018 (3 ordinary shares, 21 Nov 2018) |
+| Co-owner (PSC) | Since October 2025 |
 | Carr's Welding Products Ltd | Sister company, dissolved 2019 |
 | Reference letter | Quote published; scan removed (see 2.2) |
 | Email | john@cwt-group.com |
