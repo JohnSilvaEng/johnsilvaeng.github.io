@@ -564,9 +564,10 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 0; }
 }
 .metrics__grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  /* Three tiles: a two-column phone layout would leave a visible empty cell. */
+  grid-template-columns: minmax(0, 1fr);
 }
-@media (min-width: 760px) { .metrics__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (min-width: 760px) { .metrics__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
 .metric {
   padding: clamp(1.5rem, 3.5vw, 2.4rem) clamp(1rem, 2.5vw, 1.8rem);
@@ -1269,35 +1270,29 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 0; }
 .std-list span { color: var(--fg-muted); }
 .std-list b { color: var(--fg); font-weight: 600; }
 
-.skillbars { display: grid; gap: 1rem; }
-.skillbar__top {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 1rem;
-  margin-bottom: 0.4rem;
-}
-.skillbar__name { font-size: 0.86rem; color: var(--fg); }
-.skillbar__lvl {
-  font-family: var(--font-mono);
-  font-size: 0.63rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+.edu__note {
+  margin: 0.2rem 0 0;
+  font-size: 0.78rem;
   color: var(--fg-faint);
 }
-.skillbar__track {
-  height: 4px;
-  border-radius: 2px;
-  background: var(--bg-sunken);
-  border: 1px solid var(--line);
-  overflow: hidden;
+
+.cap-list { display: grid; gap: 1.05rem; }
+.cap-list > div {
+  display: grid;
+  gap: 0.25rem;
+  padding-left: 0.85rem;
+  border-left: 2px solid var(--line);
 }
-.skillbar__fill {
-  height: 100%;
-  width: 0;
-  background: linear-gradient(90deg, var(--laser), var(--ember));
-  border-radius: 2px;
-  transition: width 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+.cap-list dt {
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--fg);
+}
+.cap-list dd {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--fg-muted);
 }
 
 .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; margin: 0; padding: 0; }
@@ -1747,7 +1742,7 @@ body.is-locked { overflow: hidden; }
     break-inside: auto; box-shadow: none;
   }
   .metric, .cap, .pub, .fig, .compare, .tl-item, .edu, .ccard, .phase,
-  .std-list li, .speak-list li, .cpd-list li, .conf-list li, .skillbar,
+  .std-list li, .speak-list li, .cpd-list li, .conf-list li, .cap-list > div,
   .tl-win, .pullquote, .chip-group, .factsheet__row, .testimonial blockquote {
     break-inside: avoid;
   }
@@ -1765,7 +1760,7 @@ body.is-locked { overflow: hidden; }
      PDF's text layer, which is why a text check passes, but the reader sees the
      paragraph sliced in half. Only the small image frames keep it, and those
      never span a page because they carry break-inside: avoid. */
-  *:not(.case__media):not(.fig):not(.compare):not(.compare__stage):not(.compare__top):not(.skillbar__track):not(.hero__portrait):not(.visually-hidden) {
+  *:not(.case__media):not(.fig):not(.compare):not(.compare__stage):not(.compare__top):not(.hero__portrait):not(.visually-hidden) {
     overflow: visible !important;
   }
   /* The exceptions are image frames and the slider mask. Every one of them also
@@ -1803,20 +1798,10 @@ body.is-locked { overflow: hidden; }
   .case__kpis b { font-size: 12.5pt; }
   .testimonial__mark { font-size: 26pt; }
   .case__kpis b, .metric__value .unit, .tag--accent, .tag--warm,
-  .skillbar__fill, .eyebrow::before, .conf-list .presenter, .spec-table .pos {
+  .eyebrow::before, .conf-list .presenter, .spec-table .pos {
     -webkit-print-color-adjust: exact; print-color-adjust: exact;
   }
-  .skillbar__track { border-color: #999; }
-  .skillbar__fill { background: var(--warm); }
-  /* A plain Ctrl+P never runs the button handler, so the bars would print empty.
-     CSS cannot read a data attribute into a width, so the values are mirrored here. */
-  .skillbar__fill[data-skill="97"] { width: 97% !important; }
-  .skillbar__fill[data-skill="94"] { width: 94% !important; }
-  .skillbar__fill[data-skill="93"] { width: 93% !important; }
-  .skillbar__fill[data-skill="90"] { width: 90% !important; }
-  .skillbar__fill[data-skill="86"] { width: 86% !important; }
-  .skillbar__fill[data-skill="84"] { width: 84% !important; }
-  .skillbar__fill[data-skill="82"] { width: 82% !important; }
+  .cap-list > div { border-left-color: #ccc; }
   .cap-grid { background: #fff; gap: 0; }
   .cap { border-top: 1px solid #ccc; }
   .cap-grid > .cap:first-child { border-top: 0; }

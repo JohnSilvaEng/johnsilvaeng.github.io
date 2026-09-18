@@ -36,7 +36,6 @@ src = open("index.html").read()
 inject = """<script src="assets/js/site.js" defer></script>
 <script defer>window.addEventListener("load", function () { setTimeout(function () {
   document.querySelectorAll(".case__toggle[aria-expanded='false'], .acc__btn[aria-expanded='false']").forEach(function (b) { b.click(); });
-  document.querySelectorAll(".skillbar__fill").forEach(function (b) { b.style.width = b.getAttribute("data-skill") + "%"; });
   document.querySelectorAll("img").forEach(function (im) { if (im.loading === "lazy") im.loading = "eager"; });
 }, 200); });</script>"""
 open(sys.argv[1], "w").write(

@@ -149,36 +149,6 @@
     io.observe(el);
   });
 
-  /* --------------------------------------------------- elapsed-years caption */
-
-  $$("[data-years-since]").forEach(function (el) {
-    var from = parseInt(el.getAttribute("data-years-since"), 10);
-    if (isNaN(from)) return;
-    var now = new Date();
-    // Anniversary is March, when John joined in 2012.
-    var n = now.getFullYear() - from - (now.getMonth() < 2 ? 1 : 0);
-    if (n > 0) el.textContent = n + (n === 1 ? " year" : " years") + " and counting";
-  });
-
-  /* ------------------------------------------------------------- skill bars */
-
-  var bars = $$(".skillbar__fill");
-  if (bars.length) {
-    if (!("IntersectionObserver" in window) || reduceMotion) {
-      bars.forEach(function (b) { b.style.width = b.getAttribute("data-skill") + "%"; });
-    } else {
-      var barIo = new IntersectionObserver(function (entries, obs) {
-        entries.forEach(function (en) {
-          if (!en.isIntersecting) return;
-          var b = en.target;
-          setTimeout(function () { b.style.width = b.getAttribute("data-skill") + "%"; }, 80);
-          obs.unobserve(b);
-        });
-      }, { threshold: 0.3 });
-      bars.forEach(function (b) { barIo.observe(b); });
-    }
-  }
-
   /* ------------------------------------------- disclosure: cases + accordions */
 
   function wireDisclosure(btn, panelClass) {
@@ -355,11 +325,9 @@
 
   // The PDF is now a pre-built download, because asking each reader's browser to
   // print produced a different document on every machine. Ctrl+P still works, so
-  // expand everything first and fill the skill bars, which are otherwise filled
-  // by an observer only once scrolled into view.
+  // expand every collapsed panel first.
   window.addEventListener("beforeprint", function () {
     $$(".case__toggle[aria-expanded='false'], .acc__btn[aria-expanded='false']").forEach(function (b) { b.click(); });
-    $$(".skillbar__fill").forEach(function (b) { b.style.width = b.getAttribute("data-skill") + "%"; });
   });
 
   /* ------------------------------------------------------------------ misc */
