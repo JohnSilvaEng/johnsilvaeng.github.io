@@ -803,6 +803,10 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 0; }
   line-height: 1.1;
 }
 .case__kpis span {
+  display: block;
+  /* Capped so a longer caveat wraps inside its own tile instead of widening it
+     and pushing the last KPI onto a second row. */
+  max-width: 12rem;
   font-family: var(--font-mono);
   font-size: 0.64rem;
   letter-spacing: 0.08em;
