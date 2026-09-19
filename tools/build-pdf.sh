@@ -28,8 +28,8 @@ cleanup() {
 trap cleanup EXIT
 
 # The page must be fully open before it is rendered: every case study and
-# accordion expanded, the skill bars filled (they are normally filled by an
-# observer on scroll), and every lazy image forced to load.
+# accordion expanded, and every lazy image forced to load rather than waiting
+# for a scroll that never happens in a headless render.
 python3 - "$BUILD" <<'PY'
 import sys
 src = open("index.html").read()

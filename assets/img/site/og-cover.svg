@@ -31,14 +31,11 @@
     <text x="88"  y="482" font-size="54" font-weight="bold" fill="#f0873f">Tripled</text>
     <text x="88"  y="516" font-size="20" fill="#8b94a3">turnover since FY2017</text>
 
-    <text x="318" y="482" font-size="54" font-weight="bold" fill="#f0873f">+10%</text>
-    <text x="318" y="516" font-size="20" fill="#8b94a3">avg weld tensile strength</text>
+    <text x="430" y="482" font-size="54" font-weight="bold" fill="#f0873f">+10%</text>
+    <text x="430" y="516" font-size="20" fill="#8b94a3">avg weld tensile strength</text>
 
-    <text x="592" y="482" font-size="54" font-weight="bold" fill="#f0873f">2012</text>
-    <text x="592" y="516" font-size="20" fill="#8b94a3">laser welding since</text>
-
-    <text x="812" y="482" font-size="54" font-weight="bold" fill="#f0873f">ISO 9001</text>
-    <text x="812" y="516" font-size="20" fill="#8b94a3">&amp; ISO 14001 at CWT</text>
+    <text x="780" y="482" font-size="54" font-weight="bold" fill="#f0873f">Zero</text>
+    <text x="780" y="516" font-size="20" fill="#8b94a3">non-conformances &#183; 2025 audit</text>
   </g>
 
   <rect x="0" y="614" width="1200" height="16" fill="url(#rule)" opacity=".9"/>

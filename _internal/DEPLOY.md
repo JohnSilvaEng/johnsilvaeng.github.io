@@ -3,7 +3,11 @@
 Everything you need to get this portfolio live, written so you can pick it up cold in a
 month and not have to remember anything. Work top to bottom.
 
-*Last updated after the CWT rebrand and management buyout changes.*
+*Last updated 19 September 2026, after the Stage 2-5 evidence review.*
+
+> **This file is not published.** It lives in `_internal/`, which `_config.yml` excludes
+> from the GitHub Pages output. It is still readable on github.com, because the repository
+> is public — keep anything genuinely confidential out of the repository entirely.
 
 ---
 
@@ -39,13 +43,13 @@ and correct as of the last update:
 
 | Fact | On the site as |
 |---|---|
-| Trading name | CWT Welding Technologies |
+| Trading name | CWT Group (rebrand, September 2025) |
 | Legal entity | Carr's Welding Technologies Ltd, no. 03921135 |
 | Your role | Technical Director & Co-owner |
 | Statutory director | Since 1 September 2021 |
 | Shareholder | Since November 2018 (3 ordinary shares, 21 Nov 2018) |
 | Co-owner (PSC) | Since October 2025 |
-| Carr's Welding Products Ltd | Sister company, dissolved 2019 |
+| Carr's Welding Products Ltd | Sister company, no. 08513120. Dissolved 14 May 2019 (register). Ceased trading 2018 — your operational record, not a Companies House fact |
 | Reference letter | Quote published; scan removed (see 2.2) |
 | Email | john@cwt-group.com |
 
@@ -63,21 +67,23 @@ choice, not an oversight:
 
 - *Why Carr's Welding Products closed.* Publicly attributing a company failure to named
   former management carries real defamation exposure, and would sit a few sections above a
-  glowing reference from that same era. The dissolution date alone does the job.
-- *Phil Carr relocating to France.* A third party's personal circumstances, and irrelevant
-  to your pitch.
+  glowing reference from that same era. The dates alone do the job.
+- *A former director's personal circumstances.* Third-party private life, irrelevant to your
+  pitch, and not yours to publish. The same rule applies to anyone else who turns up in the
+  source material.
 
 If you disagree with either, say so — they are your calls.
 
 ### 2.2 Settled — the clutch drum customer is not identifiable
 
-Your 2023 portfolio document says the clutch drum was for *"a luxury armored personal
-vehicle to be used by a Russian Cabinet Minister"*, with a photo of the car.
+Your 2023 portfolio document identified the clutch drum's end user — a named foreign
+political office — and included a photo of the vehicle. Naming that end user is
+commercially and politically sensitive, so the identity is not recorded here either.
 
-**Decision taken:** the case study says "an armoured executive vehicle". No country, no car
-photo, and **the scanned recommendation letter has been removed from the site** — its text
-named the Russian Premier. Alistair's quote and the account of the cold-cracking fix remain
-in full; only the image is gone.
+**Decision taken:** the case study says "an armoured executive vehicle". No country, no
+vehicle photo, and **the scanned recommendation letter has been removed from the site**,
+because its text named the end user. Alistair's quote and the account of the cold-cracking
+fix remain in full; only the image is gone.
 
 The image files were deleted, not just unlinked. An unreferenced file still sitting in the
 repo would remain publicly reachable at its URL.
@@ -85,18 +91,19 @@ repo would remain publicly reachable at its URL.
 Every piece of engineering in the case study is intact: the FEA, the 3 mm weld depth, the
 safety factor of 3.0, the weld sequence, the macro of the achieved profile.
 
-**If you ever reverse this,** the letter scan is in the docx at `word/media/image39.png` and
-the car photo at `word/media/image10.png`.
+**If you ever reverse this,** both images are still in your 2023 source document, which is
+gitignored and stays on your machine. Do not reverse it without checking the end user is
+content to be named — that is their call, not yours.
 
 ### 2.3 Still to decide — references
 
 The site says *"Professional references available on request."* Your 2023 document listed
-**Tom Gilbert** and **Alistair Houghton** with their personal mobile numbers. Those were
-removed — publishing someone's mobile invites cold calls they never agreed to.
+two referees with their personal mobile numbers. Those were removed — publishing someone's
+mobile invites cold calls they never agreed to.
 
-There is now a second reason to leave it that way: **both men are your co-owners.** Companies
-House shows all three of you as directors and shareholders. Listing your own business
-partners as referees would look odd to anyone who checks.
+There is now a second reason to leave it that way: **both are your fellow directors and
+co-owners**, which Companies House shows. Listing your own business partners as referees
+would look odd to anyone who checks.
 
 **Recommended:** leave it as-is, and put some effort into getting a **customer reference** —
 an aerospace, medical or F1 name vouching for your work is worth more to a prospect than any
@@ -173,10 +180,11 @@ urgent — get it live first.
       LinkedIn may cache a stale preview for days.
 - [ ] **Open it on your phone.** Check the layout, and try the drag-to-compare sliders with
       a finger.
-- [ ] **Test the Save as PDF button** in the Contact section — it expands every collapsed
-      panel, then opens the print dialogue.
-- [ ] **Update LinkedIn** — the new URL (Contact info → Website), the company name (CWT
-      Welding Technologies), and your title if it does not yet say co-owner.
+- [ ] **Test the Download PDF button** in the Contact section — it serves the pre-built
+      `assets/docs/John-Silva-Engineering-Portfolio.pdf`. Rebuild that file with
+      `./tools/build-pdf.sh` whenever the page content changes, or the download goes stale.
+- [ ] **Update LinkedIn** — the new URL (Contact info → Website), the company name (CWT Group),
+      and your title if it does not yet say co-owner.
 - [ ] **Update your email signature and business cards** to john@cwt-group.com if that has
       not already happened.
 - [ ] **Decide what to do with the old site.** Either leave `html-resume` up, or redirect it.

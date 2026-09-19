@@ -1,0 +1,26 @@
+# GitHub Pages build configuration.
+#
+# The site is plain static HTML — there is no Jekyll content here, no front
+# matter and no Liquid tags, so Jekyll copies every file through untouched.
+# The reason it is switched on at all (this file replaced .nojekyll) is the
+# exclude list below: it is the only supported way to keep files in the
+# repository without GitHub Pages serving them at a public URL.
+#
+# Everything in _internal/ is working material — deployment notes, improvement
+# briefs, audit reports. Directories beginning with an underscore are already
+# ignored by Jekyll; the explicit entry is belt and braces.
+
+exclude:
+  - _internal/
+  - tools/
+  - .gitignore
+  - README.md
+  # Gitignored working files. They never reach GitHub, but listing them keeps a
+  # local `jekyll build` honest and survives a change to .gitignore.
+  - linkedin-copy.md
+  - li
+  - "portfolio 2023.docx"
+
+# Nothing below generates pages; these just stop Jekyll guessing.
+plugins: []
+markdown: kramdown

@@ -6,7 +6,8 @@ just HTML, CSS and one file of vanilla JavaScript. Drop it on GitHub Pages and i
 ```
 index.html                 the whole page
 site.webmanifest           icon / install metadata
-.nojekyll                  tells GitHub Pages to serve files as-is
+_config.yml                GitHub Pages build config — keeps _internal/ and tools/ off the live site
+_internal/                 working documents: deploy notes, briefs, audit reports. Not published.
 assets/
   css/site.css             design tokens + all components
   js/site.js               theme, nav, reveals, sliders, lightbox
@@ -16,40 +17,41 @@ assets/
 tools/build-pdf.sh         rebuilds that PDF
 ```
 
-> **Publishing for the first time?** Follow [`DEPLOY.md`](DEPLOY.md) instead — it is a
+> **Deployment notes and the content decisions behind the page** are in
+> [`_internal/DEPLOY.md`](_internal/DEPLOY.md) — it is a
 > step-by-step checklist including three content decisions worth confirming before the site
 > goes public. The section below is the short reference version.
 
 ---
 
-## Deploying to GitHub Pages
+## Deploying
 
-**Option A — replace the current site (recommended).**
-Your resume currently lives at `johnsilvaeng.github.io/html-resume/`. To publish this at
-your root address instead:
-
-1. Create a repository named exactly `johnsilvaeng.github.io` (if you don't already have one).
-2. Copy everything in this folder into it — *except* `portfolio 2023.docx`.
-3. Commit and push to `main`.
-4. Repo → **Settings → Pages** → Source: *Deploy from a branch*, Branch: `main`, Folder: `/ (root)`.
-5. It goes live at `https://johnsilvaeng.github.io/` within a minute or two.
+**Already live** at <https://johnsilvaeng.github.io/>, from the `main` branch of
+`JohnSilvaEng/johnsilvaeng.github.io`, folder `/ (root)`. The old
+`johnsilvaeng.github.io/html-resume/` redirects here. Publishing a change is just:
 
 ```bash
-git init
 git add .
-git commit -m "New engineering portfolio"
-git branch -M main
-git remote add origin git@github.com:johnsilvaeng/johnsilvaeng.github.io.git
-git push -u origin main
+git commit -m "Describe what you changed"
+git push
 ```
 
-**Option B — keep it under a subpath**, e.g. `johnsilvaeng.github.io/portfolio/`.
-Everything uses relative paths, so it will work unchanged — but update the
-`<link rel="canonical">` tag in `index.html` to the real address, or search engines will
-be pointed at the wrong URL.
+It is live again within a minute or two.
 
-**Custom domain.** If you ever buy one (`johnsilva.engineering`, say), add a `CNAME` file
-containing just the domain, point the DNS at GitHub, and update the canonical tag.
+**What does and does not get published.** Everything in the repository is served at a public
+URL unless `_config.yml` excludes it. That is why the working documents live in `_internal/`
+and why that directory, `tools/` and `.gitignore` are listed under `exclude:`. **Anything you
+drop in the root is public the moment you push it** — put notes, briefs and drafts in
+`_internal/`, and check a new path with `curl -o /dev/null -w '%{http_code}' <url>` after
+deploying if you are unsure.
+
+> Excluding a file from Pages does not make it private. The repository itself is public, so
+> anything committed is still readable on github.com and in the git history. Keep genuinely
+> confidential material out of the repository altogether — `.gitignore` it.
+
+**Custom domain.** You co-own the company and it has a live domain. If this should eventually
+sit at something like `john.cwt-group.com`, add a `CNAME` file containing just the domain,
+point the DNS at GitHub, and update the `<link rel="canonical">` tag in `index.html`.
 
 ---
 
@@ -61,29 +63,25 @@ with a comment banner so you can find it quickly:
 | Section | Comment marker | What lives there |
 |---|---|---|
 | Hero | `<!-- hero -->` | Name, one-line pitch, industry chips |
-| Metrics | `<!-- metrics -->` | The four headline numbers |
+| Metrics | `<!-- metrics -->` | The three headline proofs |
 | Profile | `<!-- about -->` | Narrative + the "At a glance" fact sheet |
 | Capabilities | `<!-- capabilities -->` | Six service cards |
-| Selected work | `<!-- selected work -->` | The four case studies |
+| Selected work | `<!-- selected work -->` | The five case studies |
 | Testimonial | `<!-- testimonial -->` | Reference quote |
 | Research | `<!-- research -->` | Papers, thesis, podcast, talks |
 | Experience | `<!-- experience -->` | Career timeline |
-| Credentials | `<!-- credentials -->` | Education, standards, skills, tools |
+| Credentials | `<!-- credentials -->` | Education, standards, competencies, tools |
 | Development | `<!-- CPD -->` | CPD log, conferences, milestones |
 | Contact | `<!-- contact -->` | Contact cards |
 
 ### Things worth knowing
 
-**Nothing on the page states a duration.** The third hero metric shows the *year* 2012, not
-a number of years, precisely so it can never go stale. GitHub Pages serves static files, so
-anything computed would have to be written into the HTML by hand or by a scheduled job —
-both of which rot silently. A fixed year needs neither.
-
-The small caption under it (`data-years-since="2012"`) is written by JavaScript as
-"14 years and counting". That is decoration: if the script never runs, the caption reads
-"Still counting" and no incorrect figure is ever published. Apply the same rule to anything
-you add — put a date in the markup and let the script derive the duration, never the
-reverse. The footer copyright year works the same way.
+**Write years, not durations.** "Since 2013" stays true forever; "fourteen years" is wrong
+within twelve months and nothing on a static site will tell you. GitHub Pages serves files
+exactly as committed, so any figure that counts upward has to be re-typed by hand or by a
+scheduled job, and both rot silently. The page states no duration anywhere — keep it that
+way in anything you add. The footer copyright year is the one exception, and it is written
+by JavaScript from the current date rather than stored.
 
 **Adding a case study.** Copy a whole `<article class="case">…</article>` block. Change the
 `id`, the `aria-controls` on the toggle button, and the matching `id` on the
@@ -107,7 +105,7 @@ site re-themes, including the favicon gradient and the social card.
 ## Adding or replacing images
 
 Source images out of a phone or a microscope are far too big for the web. Resize them first
-(this is what was used for the current set — it took 35 MB down to 3.3 MB):
+(this is what was used for the current set — it took 35 MB down to 2.9 MB):
 
 ```bash
 magick input.png -auto-orient -strip -resize '1200x1200>' -quality 84 \
@@ -124,7 +122,7 @@ reader announces, what shows if an image fails to load, and what Google indexes.
 
 ## The social share card
 
-`assets/img/site/og-cover-5.jpg` is what appears when the link is pasted into LinkedIn,
+`assets/img/site/og-cover-6.jpg` is what appears when the link is pasted into LinkedIn,
 WhatsApp, Slack or an email client.
 
 The source is kept alongside it as `assets/img/site/og-cover.svg` — edit that, then
@@ -132,10 +130,10 @@ regenerate:
 
 ```bash
 rsvg-convert -w 1600 -h 840 assets/img/site/og-cover.svg -o /tmp/og.png
-magick /tmp/og.png -strip -quality 88 assets/img/site/og-cover-5.jpg
+magick /tmp/og.png -strip -quality 88 assets/img/site/og-cover-6.jpg
 ```
 
-**Give it a new filename every time you change it** — `og-cover-5.jpg`, and so on. LinkedIn
+**Give it a new filename every time you change it** — `og-cover-6.jpg`, then `-7`, and so on. LinkedIn
 caches share images by URL on a separate cycle from the page, so overwriting the file in
 place leaves it serving the old picture indefinitely. Update the two references in
 `index.html` (`og:image` and `twitter:image`) to match, and `og:image:width` / `height` if
@@ -164,12 +162,13 @@ document.
 ./tools/build-pdf.sh
 ```
 
-The script opens every case study and accordion, fills the skill bars, forces the lazy
-images to load, renders A4 at 26 pages, and then refuses to ship a file with too few pages
-or too few images — the failure mode it is guarding against is a render that raced the
-image downloads and came out with holes in it.
+The script opens every case study and accordion, forces the lazy images to load, renders
+A4 — currently 25 pages — and then refuses to ship a file with fewer than 20 pages or 30
+images. The failure mode it is guarding against is a render that raced the image downloads
+and came out with holes in it.
 
-`Ctrl+P` still works for anyone who prefers it: a `beforeprint` hook expands the page first,
+`Ctrl+P` still works for anyone who prefers it: a `beforeprint` hook expands every collapsed
+panel first,
 and the print stylesheet at the bottom of `site.css` switches to a light, ink-friendly
 palette, hides the navigation and interactive furniture, and prints link addresses in full.
 The download is the better copy, because printing cannot wait for images to arrive.
