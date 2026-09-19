@@ -828,12 +828,31 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 0; }
   position: absolute;
   left: 0; right: 0; bottom: 0;
   padding: 1.6rem 0.9rem 0.7rem;
-  background: linear-gradient(transparent, rgba(4, 6, 9, 0.88));
+  /* The scrim has to carry the caption over a white chart as well as a dark
+     photograph, so it reaches full strength well before the text baseline
+     instead of only at the very bottom edge. */
+  background: linear-gradient(transparent, rgba(4, 6, 9, 0.72) 45%, rgba(4, 6, 9, 0.94));
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.75);
   font-family: var(--font-mono);
   font-size: 0.64rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(255, 255, 255, 0.9);
+}
+/* On a phone the caption is three lines deep and sits across the middle of a
+   chart. Below the image instead — the same move the print stylesheet makes,
+   so the component reads the same way on paper and on a small screen. */
+@media (max-width: 600px) {
+  .case__media { aspect-ratio: auto; }
+  .case__media img { aspect-ratio: 4 / 3; }
+  .case__media figcaption {
+    position: static;
+    background: var(--panel);
+    text-shadow: none;
+    color: var(--fg-muted);
+    padding: 0.55rem 0.75rem;
+    border-top: 1px solid var(--line);
+  }
 }
 
 /* Disclosure */
@@ -881,7 +900,7 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 0; }
 /* Phase blocks inside a case study */
 .phases { display: grid; gap: 1.8rem; counter-reset: phase; }
 @media (min-width: 820px) { .phases { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-.phase { position: relative; padding-left: 2.5rem; }
+.phase { position: relative; padding-left: 2.5rem; min-width: 0; }
 .phase::before {
   counter-increment: phase;
   content: counter(phase, decimal-leading-zero);
@@ -1056,6 +1075,18 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 0; }
 }
 .compare__badge--a { left: 0.6rem; background: rgba(10, 12, 16, 0.72); color: #ffb9a0; border: 1px solid rgba(255, 150, 110, 0.4); }
 .compare__badge--b { right: 0.6rem; background: rgba(10, 12, 16, 0.72); color: #9de8f2; border: 1px solid rgba(90, 210, 230, 0.4); }
+/* On a narrow stage the two badges meet in the middle and the longer label is
+   painted over. Shrink them rather than truncate: both stay readable. */
+@media (max-width: 600px) {
+  .compare__badge {
+    top: 0.4rem;
+    font-size: 0.5rem;
+    letter-spacing: 0.04em;
+    padding: 0.18rem 0.3rem;
+  }
+  .compare__badge--a { left: 0.4rem; }
+  .compare__badge--b { right: 0.4rem; }
+}
 
 .compare__caption {
   padding: 0.7rem 0.85rem;
@@ -1216,6 +1247,13 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 0; }
   color: var(--fg-faint);
 }
 .speak-list .what { color: var(--fg); }
+/* #7 — the software entries are prose, not one-line talk titles. Without a cap
+   they run to a ~150-character measure on a wide desktop. Only the prose block
+   is capped; the talks list in section 04 keeps its full-width three columns. */
+@media (min-width: 1100px) {
+  .speaking--prose > p,
+  .speaking--prose .what { max-width: 82ch; }
+}
 .speak-list .who { color: var(--fg-muted); font-size: 0.8rem; }
 
 /* ---------- 13. Credentials ------------------------------------------------ */
@@ -1816,13 +1854,21 @@ body.is-locked { overflow: hidden; }
   .case__media { aspect-ratio: 16 / 10; }
   /* White-on-gradient caption: unreadable if the gradient is not painted. In print
      it sits below the image as plain dark text instead. */
-  .case__media { aspect-ratio: auto; border: 0; }
+  /* The caption is in normal flow in print, so the rounded bottom-left corner
+     of this overflow:hidden box shaved the first glyph off every one of them. */
+  .case__media { aspect-ratio: auto; border: 0; border-radius: 0; }
   .case__media img { position: static; width: 100%; height: auto; border: 1px solid #ccc; border-radius: 6px; }
   .case__media figcaption {
     position: static; background: none !important; color: #000;
     padding: 0.3rem 0 0; font-size: 7pt;
   }
-  .fig img { aspect-ratio: 16 / 10; }
+  /* The 16/10 crop is kept so the figure grid stays even, but the image box was
+     overflowing downward and .fig's overflow:hidden painted it over the label
+     inside the caption — "Test rig" vanished entirely, "With ultrasound" was
+     sheared in half. Pinning the image height to the ratio stops the overflow,
+     and the caption paints above whatever happens. */
+  .fig img { aspect-ratio: 16 / 10; height: auto; display: block; }
+  .fig figcaption { position: relative; z-index: 1; background: #fff; }
   .fig button { cursor: default; }
 
   /* ---- the comparison figures print as a fixed 50/50 split ---- */
