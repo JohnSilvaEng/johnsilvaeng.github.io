@@ -255,7 +255,9 @@
           calculating the weld depth and profile a design actually needs, developing the laser
           parameters to achieve it, and then building the quality system that proves it — every time,
           to ISO 9001. When the existing technology could not reach far enough, I went and improved the
-          technology itself, and published the results.
+          technology itself, and published the results. Increasingly I focus on turning that
+          engineering knowledge into systems other people can use reliably — documented methods,
+          controlled processes, decision-support tools and software.
         </p>
         <p>
           I am equally comfortable in front of a customer's engineering team, a conference audience, or
@@ -347,16 +349,21 @@
     </div>
 
     <div class="speaking" data-reveal>
-      <h3 style="font-size:var(--step-1);margin-bottom:0.6rem">Engineering tools I have built</h3>
-      <p style="color:var(--fg-muted);font-size:0.9rem;margin-bottom:1.2rem">Software written to the same standard as the quality system it serves.</p>
+      <h3 style="font-size:var(--step-1);margin-bottom:0.6rem">Engineering software I specify, direct and verify</h3>
+      <p style="color:var(--fg-muted);font-size:0.9rem;margin-bottom:1.2rem">
+        I build engineering software when the tools I need do not exist. My part is the engineering:
+        I define the problem, encode the domain knowledge, set the acceptance criteria, direct the
+        implementation, and decide whether the output can be trusted on a real job. These are
+        decision-support and controlled engineering tools, not products.
+      </p>
       <ul class="speak-list">
         <li>
           <span class="when">2013 → now</span>
-          <span class="what"><b>Laser Settings Predictor</b> — an Excel calculation tool I built in 2013 to derive starting laser parameters and predicted penetration depth from a job's material, thickness and target depth. In use at quote and setup stage ever since; now being ported to a standalone desktop application so it works without me in the room.</span>
+          <span class="what"><b>Laser Settings Predictor</b> — Starting parameters for an unfamiliar job lived in my head and in old job sheets, so quoting a part nobody had welded before cost either my time or a guess. The tool encodes the relationship between material, thickness and target penetration depth as a calculation anyone can run at quote or setup stage. Built in Excel in 2013 and in use ever since. What it produces is a starting point to be proved on a coupon, not a qualified parameter set — the trial weld still decides. Now being ported to a standalone application so the method outlives the spreadsheet, and works without me in the room.</span>
         </li>
         <li>
           <span class="when">2026</span>
-          <span class="what"><b>WPS Database</b> — desktop application for authoring and printing Welding Procedure Specifications to ISO 15609-4. Offline by design as a customer-confidentiality control, verified by a zero-network sweep of every screen. Six Architecture Decision Records, SHA-256 build identity, and a 247-check verification harness with mutation coverage. A data-entry fix caught a fivefold error in a vacuum-leak acceptance threshold on a real procedure before it shipped.</span>
+          <span class="what"><b>WPS Database</b> — Controlled engineering software for writing and issuing Welding Procedure Specifications to ISO 15609-4, built to take transcription and engineering risk out of a document that has to be right first time. The engineering is in the validation: acceptance criteria, units and ranges are checked against what the standard and the process actually permit, so a wrong number is caught at entry rather than on a live job. On a live procedure the validation caught a vacuum-leak acceptance criterion entered five times too loose, before the procedure was released. Offline by design as a customer-confidentiality control, and checked screen by screen to confirm nothing leaves the machine.</span>
         </li>
         <li>
           <span class="when">2026</span>
@@ -1009,7 +1016,7 @@
               things that matter, and forecasts the year ahead.
             </p>
             <ul class="case__kpis">
-              <li><b>85%</b><span>jobs turned round within five days, against a target that did not exist before</span></li>
+              <li><b>91%</b><span>achieved · 85% target — jobs closed within five working days</span></li>
               <li><b>±1.5%</b><span>forecast accuracy in stable years, rolling-origin backtest</span></li>
               <li><b>−19%</b><span>energy per unit of sales, year on year (ISO 14001)</span></li>
             </ul>
@@ -1049,9 +1056,9 @@
                 imports, settings, home.
               </p>
               <p>
-                Turnaround now reports the share of jobs closed within five working days against a formal
-                85% target. The earlier measure had been an average of jobs falling between three and
-                five days, with no target at all. Setting the target required documenting which orders
+                Turnaround now reports the share of jobs closed within five working days: 91% achieved
+                against a formal 85% target. The earlier measure had been an average of jobs falling
+                between three and five days, with no target at all. Setting the target required documenting which orders
                 count — framework and paused orders are excluded, and the exclusion is recorded.
               </p>
             </div>
@@ -1069,10 +1076,11 @@
             <div class="phase">
               <h4>Engineering</h4>
               <p>
-                Python, PyQt6 and SQLite; packaged with PyInstaller and an Inno Setup installer in two
-                flavours, Writer and read-only Viewer, so colleagues see the same numbers without being
-                able to change them. Two automated validators run as the release gate. First installed on
-                a second machine in August 2026.
+                Built in Python on a local SQLite database imported from the Sage exports, and issued in
+                two forms — a Writer for whoever maintains it, and a read-only Viewer, so colleagues see
+                the same numbers without being able to change them. Two automated validators have to pass
+                before a release goes out. First installed on a second machine in August 2026, which was
+                the point of the exercise: the numbers no longer run through me.
               </p>
             </div>
 
@@ -1530,7 +1538,7 @@
             <li><span class="yr">2025</span><span>Became co-owner alongside two fellow directors (October)</span></li>
             <li><span class="yr">2025</span><span>Recertified to ISO 9001:2015 and ISO 14001:2015 with zero non-conformances (December)</span></li>
             <li><span class="yr">2026</span><span>KPI dashboard application deployed, replacing the 2016 spreadsheets</span></li>
-            <li><span class="yr">2026</span><span>WPS Database under version control with Architecture Decision Records</span></li>
+            <li><span class="yr">2026</span><span>WPS Database issued as controlled software for writing welding procedures to ISO 15609-4</span></li>
             <li><span class="yr">2026</span><span>Turnover more than three times the FY2017 low (internal ledger, year to April)</span></li>
           </ul>
         </div></div></div>
