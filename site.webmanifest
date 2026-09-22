@@ -1,0 +1,12 @@
+{
+  "name": "John Silva — Engineering Portfolio",
+  "short_name": "John Silva",
+  "description": "Laser welding and mechanical engineering portfolio.",
+  "icons": [
+    { "src": "assets/img/site/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ],
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#090b0f",
+  "theme_color": "#090b0f"
+}
